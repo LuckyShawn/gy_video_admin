@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>imooc-video-admin-mng</display-name>
+	<display-name>gy_video_admin_web</display-name>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -49,7 +49,7 @@
 	
 	<!-- springmvc的前端控制器 -->
 	<servlet>
-		<servlet-name>imooc-video-admin-mng</servlet-name>
+		<servlet-name>gy_video_admin_web</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<!-- contextConfigLocation不是必须的， 如果不配置contextConfigLocation， springmvc的配置文件默认在：WEB-INF/servlet的name+"-servlet.xml" -->
 		<init-param>
@@ -60,7 +60,7 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>imooc-video-admin-mng</servlet-name>
+		<servlet-name>gy_video_admin_web</servlet-name>
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
     

@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gy_video_admin_web</artifactId>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
