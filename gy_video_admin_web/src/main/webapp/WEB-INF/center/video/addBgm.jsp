@@ -98,7 +98,6 @@
     	dataType: "json",
     	done: function(e, data) {
     		console.log(data);
-    		
     		if (data.result.status != '200') {
     			alert("长传失败...");
     		} else {

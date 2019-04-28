@@ -1,7 +1,10 @@
 package com.shawn.video.controller;
 
+import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Description TODO
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HelloController {
 
     @GetMapping("/hello")
-    public String hello(){
+    public String hello(HttpServletRequest httpRequest){
+        String contextPath = httpRequest.getContextPath();
+        System.out.println(contextPath);
         return "hello";
     }
 
