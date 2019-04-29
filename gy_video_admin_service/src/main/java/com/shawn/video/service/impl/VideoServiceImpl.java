@@ -25,6 +25,8 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private BgmMapper bgmMapper;
 
+
+
     @Autowired
     private Sid sid;
 
@@ -32,6 +34,11 @@ public class VideoServiceImpl implements VideoService {
     public void addBgm(Bgm bgm) {
         bgm.setId(sid.nextShort());
         bgmMapper.insert(bgm);
+    }
+
+    @Override
+    public void delBgm(String id) {
+        bgmMapper.deleteByPrimaryKey(id);
     }
 
     @Override

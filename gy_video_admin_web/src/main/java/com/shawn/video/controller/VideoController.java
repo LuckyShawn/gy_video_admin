@@ -56,6 +56,13 @@ public class VideoController {
         return pagedResult;
     }
 
+    @PostMapping("/delBgm")
+    @ResponseBody
+    public JSONResult delBgm(String bgmId) {
+        videoService.delBgm(bgmId);
+        return JSONResult.ok();
+    }
+
     @PostMapping("/addBgm")
     @ResponseBody
     public JSONResult addBgm(Bgm Bgm) {

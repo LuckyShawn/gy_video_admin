@@ -16,6 +16,12 @@ public interface VideoService {
     void addBgm(Bgm bgm);
 
     /**
+     * 删除BGM
+     * @param id
+     */
+    void delBgm(String id);
+
+    /**
      * 查询Bgm列表
      * @param
      * @return
