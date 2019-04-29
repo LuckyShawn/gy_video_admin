@@ -106,7 +106,6 @@
     			$("#bgmContent").html("<a href='" + url + "' target='_blank'>点我播放</a>");
     			$("#path").attr("value", data.result.data);
     		}
-    		
     	}
     });
     

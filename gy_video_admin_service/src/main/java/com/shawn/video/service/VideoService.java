@@ -1,6 +1,7 @@
 package com.shawn.video.service;
 
 import com.shawn.video.pojo.Bgm;
+import com.shawn.video.utils.PagedResult;
 
 /**
  * @Description TODO
@@ -13,4 +14,11 @@ public interface VideoService {
      * @param bgm
      */
     void addBgm(Bgm bgm);
+
+    /**
+     * 查询Bgm列表
+     * @param
+     * @return
+     */
+    PagedResult queryBgmList(Integer page,Integer pageSize);
 }

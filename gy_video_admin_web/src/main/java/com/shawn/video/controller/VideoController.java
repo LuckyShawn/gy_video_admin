@@ -1,13 +1,16 @@
 package com.shawn.video.controller;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.shawn.video.pojo.Bgm;
+import com.shawn.video.service.VideoService;
 import com.shawn.video.utils.JSONResult;
+import com.shawn.video.utils.PagedResult;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sun.nio.ch.IOUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,19 +26,46 @@ import java.io.InputStream;
 @RequestMapping("/video")
 public class VideoController {
 
+    @Autowired
+    private VideoService videoService;
+
     @GetMapping("/showAddBgm")
     public String showAddBgm() {
         return "video/addBgm";
     }
 
+    /**
+     * 显示bgm列表
+     * @return
+     */
+    @GetMapping("/showBgmList")
+    public String showBgmList() {
+        return "video/bgmList";
+    }
+
+    /**
+     * 查询bgm列表
+     * @param page
+     * @param
+     * @return
+     */
+    @PostMapping("/queryBgmList")
+    @ResponseBody
+    public PagedResult queryBgmList(Integer page) {
+        PagedResult pagedResult = videoService.queryBgmList(page, 10);
+        return pagedResult;
+    }
+
     @PostMapping("/addBgm")
     @ResponseBody
-    public JSONResult addBgm() {
-
-
-
+    public JSONResult addBgm(Bgm Bgm) {
+        videoService.addBgm(Bgm);
         return JSONResult.ok();
     }
+
+
+
+
 
     @PostMapping("/bgmUpload")
     @ResponseBody
