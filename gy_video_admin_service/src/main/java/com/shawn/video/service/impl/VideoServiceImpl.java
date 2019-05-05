@@ -2,11 +2,13 @@ package com.shawn.video.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shawn.video.Enums.BGMOperatorTypeEnum;
 import com.shawn.video.idworker.Sid;
 import com.shawn.video.mapper.BgmMapper;
 import com.shawn.video.pojo.Bgm;
 import com.shawn.video.pojo.BgmExample;
 import com.shawn.video.service.VideoService;
+import com.shawn.video.service.util.ZKCurator;
 import com.shawn.video.utils.PagedResult;
 import com.sun.tools.internal.xjc.reader.xmlschema.BGMBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,8 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private BgmMapper bgmMapper;
 
-
+    @Autowired
+    private ZKCurator zkCurator;
 
     @Autowired
     private Sid sid;
@@ -34,11 +37,16 @@ public class VideoServiceImpl implements VideoService {
     public void addBgm(Bgm bgm) {
         bgm.setId(sid.nextShort());
         bgmMapper.insert(bgm);
+        //创建zk节点
+        zkCurator.sendBgmOperator(bgm.getId(),BGMOperatorTypeEnum.ADD.type);
     }
 
     @Override
     public void delBgm(String id) {
+
         bgmMapper.deleteByPrimaryKey(id);
+        //删除zk节点
+        zkCurator.sendBgmOperator(id,BGMOperatorTypeEnum.DELETE.type);
     }
 
     @Override

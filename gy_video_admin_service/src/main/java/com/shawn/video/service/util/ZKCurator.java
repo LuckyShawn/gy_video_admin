@@ -1,11 +1,9 @@
-package com.shawn.video.util;
+package com.shawn.video.service.util;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.slf4j.LoggerFactory;
-
-import java.util.logging.Logger;
 
 /**
  * @Description TODO
@@ -35,13 +33,27 @@ public class ZKCurator {
                  */
                 client.create().creatingParentsIfNeeded()
                         .withMode(CreateMode.PERSISTENT)        //节点类型，持久节点
-                        .withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE) //acl：匿名权限
+                        .withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)   //acl：匿名权限
                         .forPath("/bgm");
                 log.info("zookeeper初始化成功...");
                 log.info("zookeeper初始化成功...{0}",client.isStarted());
             }
         } catch (Exception e) {
             log.error("zookeeper客户端链接，初始化错误...");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 增加或杀出bgm，向zk-server创建子节点，供小程序服务器后端监听
+     */
+    public void sendBgmOperator(String bgmId,String operType){
+        try {
+            client.create().creatingParentsIfNeeded()
+                    .withMode(CreateMode.PERSISTENT)        //节点类型，持久节点
+                    .withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)   //acl：匿名权限
+                    .forPath("/bgm/" + bgmId, operType.getBytes());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
