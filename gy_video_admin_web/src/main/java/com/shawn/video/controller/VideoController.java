@@ -1,6 +1,7 @@
 package com.shawn.video.controller;
 
 
+import com.shawn.video.Enums.VideoStatusEnum;
 import com.shawn.video.pojo.Bgm;
 import com.shawn.video.service.VideoService;
 import com.shawn.video.utils.JSONResult;
@@ -28,6 +29,34 @@ public class VideoController {
 
     @Autowired
     private VideoService videoService;
+
+    @GetMapping("/showReportList")
+    public String showReportList(){
+        return "video/reportList";
+    }
+
+    /**
+     * 查询举报信息列表
+     * @return
+     */
+    @PostMapping("/reportList")
+    @ResponseBody
+    public PagedResult reportList(Integer page){
+        PagedResult result = videoService.queryReportList(page,10);
+        return result;
+    }
+
+    /**
+     * 更新视频状态（禁止播放，可播放）
+     * @return
+     */
+    @PostMapping("/forbidVideo")
+    @ResponseBody
+    public JSONResult forbidVideo(String videoId){
+        videoService.updateVideoStatus(videoId,VideoStatusEnum.FORBID.value       );
+        return JSONResult.ok();
+    }
+
 
     @GetMapping("/showAddBgm")
     public String showAddBgm() {
@@ -69,8 +98,6 @@ public class VideoController {
         videoService.addBgm(Bgm);
         return JSONResult.ok();
     }
-
-
 
 
 

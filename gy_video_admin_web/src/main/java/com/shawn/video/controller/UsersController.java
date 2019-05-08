@@ -1,8 +1,12 @@
 package com.shawn.video.controller;
 
 import com.shawn.video.pojo.AdminUser;
+import com.shawn.video.pojo.Users;
+import com.shawn.video.service.UsersService;
 import com.shawn.video.utils.JSONResult;
+import com.shawn.video.utils.PagedResult;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,20 +21,21 @@ import java.util.UUID;
 @RequestMapping("users")
 public class UsersController {
 	
-
+	@Autowired
+	private UsersService usersService;
 	
 	@GetMapping("/showList")
 	public String showList() {
 		return "users/usersList";
 	}
 	
-//	@PostMapping("/list")
-//	@ResponseBody
-//	public PagedResult list(Users user , Integer page) {
-//
-//		PagedResult result = usersService.queryUsers(user, page == null ? 1 : page, 10);
-//		return result;
-//	}
+	@PostMapping("/list")
+	@ResponseBody
+	public PagedResult list(Users user , Integer page) {
+
+		PagedResult result = usersService.queryUsers(user, page == null ? 1 : page, 10);
+		return result;
+	}
 	
 
 	@GetMapping("/login")
